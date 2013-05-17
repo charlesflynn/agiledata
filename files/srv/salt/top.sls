@@ -1,3 +1,6 @@
 base:
   '*':
-    - core
+    - core.packages
+    - core.directories
+    - core.venv
+    - core.software
