@@ -1,29 +1,25 @@
 default:
-    cpus: 1
-    memory: 1024
-    box: debian-607-x64
-    domain: localdomain
+  cpus: 1
+  memory: 768
+  box: ubuntu-server-12042-x64
+  domain: localdomain
 
 nodes:
-#-
-#    name: node01
-#    ip: 10.100.100.11
-#    box: fedora-18-x64
-#-
-#    name: node02
-#    ip: 10.100.100.12
-#    box: debian-607-x64
 -
-    name: node03
-    ip: 10.100.100.13
-    box: centos-64-x64
+  name: fedora
+  ip: 10.100.100.13
+  cpus: 2
+  memory: 1024
+  box: fedora-18-x64
 -
-    name: node04
-    ip: 10.100.100.14
-    box: ubuntu-server-12042-x64
+  name: ubuntu
+  ip: 10.100.100.14
+  cpus: 2
+  memory: 1024
+  box: ubuntu-server-12042-x64
 
 boxes:
-    fedora-18-x64: http://puppet-vagrant-boxes.puppetlabs.com/fedora-18-x64-vbox4210.box
-    debian-607-x64: http://puppet-vagrant-boxes.puppetlabs.com/debian-607-x64-vbox4210.box
-    centos-64-x64: http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210.box
-    ubuntu-server-12042-x64: http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box
+  fedora-18-x64: http://puppet-vagrant-boxes.puppetlabs.com/fedora-18-x64-vbox4210.box
+  debian-607-x64: http://puppet-vagrant-boxes.puppetlabs.com/debian-607-x64-vbox4210.box
+  centos-64-x64: http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210.box
+  ubuntu-server-12042-x64: http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box
