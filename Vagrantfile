@@ -3,7 +3,7 @@
 
 require 'yaml'
 
-nodecfg = YAML::load_file('config.yml')
+nodecfg = YAML::load_file('vagrantcfg.yml')
 nodecfg['nodes'].each do |node|
     node.merge!(nodecfg['default']) { |key, nval, tval | nval }
     node['box_url'] = nodecfg['boxes'][node['box']]
@@ -14,7 +14,8 @@ Vagrant.configure("2") do |config|
 
     nodecfg['nodes'].each do |node|
         config.vm.define node['name'] do |node_config|
-            config.vm.synced_folder "files/srv/", "/srv/"
+            config.vm.synced_folder "salt/", "/srv/salt/"
+            config.vm.synced_folder "pillar/", "/srv/pillar/"
             node_config.vm.hostname = node['name']
             node_config.vm.box = node['box']
             node_config.vm.box_url = node['box_url']
@@ -27,7 +28,8 @@ Vagrant.configure("2") do |config|
             end
 
             node_config.vm.provision :salt do |salt|
-                salt.minion_config = "files/minion"
+                salt.minion_config = "minion.conf"
+                salt.verbose = true
                 salt.run_highstate = true
             end
 
