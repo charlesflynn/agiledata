@@ -1,24 +1,10 @@
 {% set downloads_dir = '{0}/downloads'.format(pillar.base_dir) %}
-{% set data_dir = '{0}/data'.format(pillar.base_dir) %}
 {% set book_dir = '{0}/book-code'.format(pillar.base_dir) %}
 {% set software_dir = '{0}/software'.format(pillar.base_dir) %}
+{% set venv_dir = '{0}/venv'.format(pillar.base_dir) %}
 {% set lib_dir = '{0}/lib'.format(software_dir) %}
-
-directories:
-  file.directory:
-    - names: 
-      - {{ pillar.base_dir }}
-      - {{ software_dir }}
-      - {{ downloads_dir }}
-      - {{ data_dir }}
-      - {{ lib_dir }}
-      - {{ book_dir }}
-      - /data/db
-    - user: {{ pillar.user }}
-    - group: {{ pillar.group }}
-    - file_mode: 744
-    - dir_mode: 755
-    - makedirs: True
+{% set data_dir = '/data' %}
+{% set mongo_dir = '{0}/db'.format(data_dir) %}
 
 ackrc:
   file.managed:
@@ -26,6 +12,49 @@ ackrc:
     - source: salt://agiledata/ackrc
     - user: {{ pillar.user }}
     - mode: 755
+
+directories:
+  file.directory:
+    - names: 
+      - {{ pillar.base_dir }}
+      - {{ downloads_dir }}
+      - {{ book_dir }}
+      - {{ software_dir }}
+      - {{ lib_dir }}
+      - {{ data_dir }}
+      - {{ mongo_dir }}
+    - user: {{ pillar.user }}
+    - group: {{ pillar.group }}
+    - file_mode: 744
+    - dir_mode: 755
+    - recurse:
+        - user
+        - group
+        - mode
+    - makedirs: True
+    - require:
+      - pkg: packages
+
+{% if pillar.accept_oracle_download_terms == true %}
+{% from 'agiledata/oracle_java.sls' import get_java with context %}
+{{ get_java(software_dir) }}
+{% endif %}
+
+book-code:
+  git.latest:
+    - name: https://github.com/rjurney/Agile_Data_Code.git
+    - target: {{ book_dir }}
+    - runas: {{ pillar.user }}
+    - require:
+      - file: directories
+
+venv:
+  virtualenv.manage:
+    - name: {{ venv_dir }}
+    - runas: {{ pillar.user }}
+    - no_site_packages: True
+    - distribute: True
+    - python: python2.7
     - require:
       - file: directories
 
@@ -39,48 +68,28 @@ env.sh:
     - user: {{ pillar.user }}
     - mode: 755
     - require:
-      - file: directories
-
-venv:
-  virtualenv.manage:
-    - name: {{ pillar.base_dir }}/venv
-    - runas: {{ pillar.user }}
-    - no_site_packages: True
-    - distribute: True
-    - python: python2.7
+      - virtualenv: venv
 
 numpy:
   pip.installed:
-    - bin_env: {{ pillar.base_dir }}/venv
+    - bin_env: {{ venv_dir }}
     - require:
       - pkg: packages
       - virtualenv: venv
 
 scipy:
   pip.installed:
-    - bin_env: {{ pillar.base_dir }}/venv
+    - bin_env: {{ venv_dir }}
     - require:
       - pip: numpy
-
-book-code:
-  git.latest:
-    - name: https://github.com/rjurney/Agile_Data_Code.git
-    - target: {{ book_dir }}
-    - runas: {{ pillar.user }}
-    - require:
-      - pkg: packages
-      - file: directories
 
 book-pip:
   pip.installed:
-    - bin_env: {{ pillar.base_dir }}/venv
+    - bin_env: {{ venv_dir }}
     - requirements: {{ book_dir }}/requirements.txt
     - order: last
     - require:
-      - pip: numpy
       - pip: scipy
-      - virtualenv: venv
-      - git: book-code
 
 link-jars:
   file.managed:
@@ -116,12 +125,6 @@ link-jars:
 {% set install_file = downloads_dir + '/' + item.source.rpartition('/')[2] %}
 {% set unpack = 'tar xfa' %}
 
-{% if item.name ==  'java' %}
-{% from 'agiledata/oracle_java.sls' import get_java with context %}
-{{ get_java(install_file) }}
-{% set unpack = 'sh' %}
-{% endif %}
-
 {{ item.name }}-file:
   file.managed:
     - name: {{ install_file }}
@@ -149,7 +152,6 @@ link-jars:
     - target: {{ software_dir }}/{{ item.target }}
     - runas: {{ pillar.user }}
     - require:
-      - pkg: packages
       - file: directories
   cmd.run:
     - name: source {{ pillar.base_dir }}/env.sh; {{ item.cmd }}

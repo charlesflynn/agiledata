@@ -19,12 +19,6 @@ lib:
 
 software:
 -
-  name: java
-  source: salt://jdk-6u45-linux-x64.bin
-  target: jdk1.6.0_45
-  cmd: sh
-  hash: md5=40c1a87563c5c6a90a0ed6994615befe
--
   name: pig
   source: http://mirrors.gigenet.com/apache/pig/pig-0.11.1/pig-0.11.1.tar.gz
   target: pig-0.11.1
