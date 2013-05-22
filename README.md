@@ -1,6 +1,6 @@
 # agiledata
 
-Builds an environment for Russell Jurney's forthcoming book [Agile Data](http://shop.oreilly.com/product/0636920025054.do).
+Builds a data science work environment for Russell Jurney's forthcoming book [Agile Data](http://shop.oreilly.com/product/0636920025054.do).
 
 ## Prerequisites
 
@@ -10,12 +10,12 @@ You will need [Virtualbox](https://www.virtualbox.org/) and [Vagrant](http://www
 
 1. Install [Salty Vagrant](https://github.com/saltstack/salty-vagrant/tree/master) with `vagrant gem install vagrant-salt`
 2. Clone this repo and edit the `Vagrantfile` to customize your VM to taste.
-3. Edit  `pillar/data.sls` and change `accept_oracle_download_terms` to `true`.[1]
+3. Edit  `pillar/data.sls` and change `accept_oracle_download_terms` to `true`.
 4. Run `vagrant up`
 
-See the [Installation notes](#Installation notes) section below for details on a misleading error message you may receive.
+See the [Installation notes](#installation-notes) section below for details on a misleading error message you may receive.
 
-[1]: The method for agreeing to the Oracle terms and downloading Java is based on the Chef [Java Cookbook](https://github.com/opscode-cookbooks/java).
+The method for agreeing to the Oracle terms and downloading Java is based on the Chef [Java Cookbook](https://github.com/opscode-cookbooks/java).
 
 ### Initial run versus subsequent runs
 
@@ -46,7 +46,7 @@ The default base directory is `/home/vagrant/agiledata`, which contains the foll
 - `book-code`: a clone of the [Agile_Data_Code](https://github.com/rjurney/Agile_Data_Code) repo.
 - `downloads`: tarfiles downloaded during installation.
 - `env.sh`: source this script to set `JAVA_HOME` and add all tool binaries to your `PATH`.
-- `linkjars.sh`: see the [Registering jarfiles in pig](# Registering jarfiles in pig) section below.
+- `linkjars.sh`: see the [Registering jarfiles in pig](#registering-jarfiles-in-pig) section below.
 - `software`: tools and libraries are installed in this directory.
 - `venv`: the python [virtualenv](http://www.virtualenv.org/) used in the book. 
 
@@ -81,7 +81,7 @@ Salt 0.15.x is affected by issue [saltstack/salt#4904](https://github.com/saltst
 
     salt-call state.highstate -l debug
 
-True errors in building the agiledata environment are much uglier than this. However, if you'd like to verify the installation, ssh into the VM with `vagrant ssh` and then run `sudo salt-call state.highstate -l debug`. Since this is a subsequent run, it should take only a minute or two to complete. Since you are running the state directly rather than through Vagrant, you should see a true return code on success.
+True errors in building the agiledata environment are much uglier than this. However, if you'd like to verify the installation, ssh into the VM with `vagrant ssh` and then run `sudo salt-call state.highstate -l debug`. This is a subsequent run, so it should take only a minute or two to complete. Since you are running the state directly rather than through Vagrant, you should see a true return code on success.
 
 ### Supported operating systems
 
