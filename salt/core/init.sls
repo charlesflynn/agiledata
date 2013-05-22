@@ -10,7 +10,7 @@ packages:
       - git
       - curl
       - python-virtualenv
-    {% if grains['os'] == 'Debian' or grains['os'] == 'Ubuntu'%}
+    {% if grains['os'] == 'Debian' or grains['os'] == 'Ubuntu' %}
       - ack-grep
       - netcat
       - vim
@@ -20,7 +20,7 @@ packages:
       - libatlas-base-dev
       - liblapack-dev
       - gfortran
-    {% elif grains['os'] == 'RedHat' or grains['os'] == 'Fedora' or grains['os'] == 'CentOS'%}
+    {% elif grains['os'] == 'RedHat' or grains['os'] == 'Fedora' or grains['os'] == 'CentOS' %}
       - ack
       - nmap-ncat
       - vim-enhanced
