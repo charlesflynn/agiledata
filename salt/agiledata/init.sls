@@ -29,19 +29,6 @@ ackrc:
     - require:
       - file: directories
 
-pigrc:
-  file.managed:
-    - name: {{ pillar.base_dir }}/pigrc
-    - user: {{ pillar.user }}
-    - mode: 755
-    - require:
-      - file: directories
-  cmd.run:
-    - name: find {{ pillar.base_dir }} -path "*jdk*" -prune -o -path "*maven*" -prune -o -name '*.jar' -printf "REGISTER %p\n" > {{ pillar.base_dir }}/pigrc
-    - user: {{ pillar.user }}
-    - require:
-      - file: pigrc
-
 env.sh:
   file.managed:
     - name: {{ pillar.base_dir }}/env.sh
