@@ -13,6 +13,7 @@ directories:
       - {{ data_dir }}
       - {{ lib_dir }}
       - {{ book_dir }}
+      - /data/db
     - user: {{ pillar.user }}
     - group: {{ pillar.group }}
     - file_mode: 744
@@ -93,6 +94,22 @@ book-pip:
       - pip: scipy
       - virtualenv: venv
       - git: book-code
+
+link-jars:
+  file.managed:
+    - name: {{ pillar.base_dir }}/linkjars.sh
+    - source: salt://agiledata/linkjars.sh.jinja
+    - template: jinja
+    - defaults:
+        software_dir: {{ software_dir }}
+        lib_dir: {{ lib_dir }}
+    - user: {{ pillar.user }}
+    - mode: 755
+  cmd.run:
+    - name: {{ pillar.base_dir }}/linkjars.sh
+    - user: {{ pillar.user }}
+    - order: last
+
 
 {% for item in pillar.lib %}
 {% set install_file = lib_dir + '/' + item.source.rpartition('/')[2] %}
