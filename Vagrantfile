@@ -14,8 +14,8 @@ Vagrant.configure("2") do |config|
 
     nodecfg['nodes'].each do |node|
         config.vm.define node['name'] do |node_config|
-            config.vm.synced_folder "salt/", "/srv/salt/"
-            config.vm.synced_folder "pillar/", "/srv/pillar/"
+            node_config.vm.synced_folder "salt/", "/srv/salt/"
+            node_config.vm.synced_folder "pillar/", "/srv/pillar/"
             node_config.vm.hostname = node['name']
             node_config.vm.box = node['box']
             node_config.vm.box_url = node['box_url']
