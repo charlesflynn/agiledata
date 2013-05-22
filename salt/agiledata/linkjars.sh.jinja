@@ -1,0 +1,2 @@
+find {{ lib_dir }} -type l -exec rm {} \;
+find {{ software_dir }} -maxdepth 5 -path '*jdk*' -prune -o -path '*maven*' -prune -o -path '{{ lib_dir }}*' -prune -o -name '*.jar' -exec ln -s -t {{ lib_dir }}/ {} \;
