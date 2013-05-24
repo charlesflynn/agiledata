@@ -3,6 +3,12 @@ base_dir: /home/vagrant/agiledata
 user: vagrant
 group: vagrant
 
+bin:
+-
+  name: ack
+  source: http://beyondgrep.com/ack-2.04-single-file
+  hash: sha1=1c6f220595ad20f1c92bdf253054b0459ee222c3
+
 lib:
 -
   name: avro

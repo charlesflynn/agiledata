@@ -1,4 +1,5 @@
 {% set downloads_dir = '{0}/downloads'.format(pillar.base_dir) %}
+{% set bin_dir = '{0}/bin'.format(pillar.base_dir) %}
 {% set book_dir = '{0}/book-code'.format(pillar.base_dir) %}
 {% set software_dir = '{0}/software'.format(pillar.base_dir) %}
 {% set venv_dir = '{0}/venv'.format(pillar.base_dir) %}
@@ -18,6 +19,7 @@ directories:
     - names: 
       - {{ pillar.base_dir }}
       - {{ downloads_dir }}
+      - {{ bin_dir }}
       - {{ book_dir }}
       - {{ software_dir }}
       - {{ lib_dir }}
@@ -64,6 +66,7 @@ env.sh:
     - source: salt://agiledata/env.sh.jinja
     - template: jinja
     - defaults:
+        bin_dir: {{ bin_dir }}
         software_dir: {{ software_dir }}
     - user: {{ pillar.user }}
     - mode: 755
@@ -113,6 +116,20 @@ link-jars:
   file.managed:
     - name: {{ install_file }}
     - user: {{ pillar.user }}
+    - source: {{ item.source }}
+    - source_hash: {{ item.hash }}
+    - require:
+      - file: directories
+{% endfor %}
+
+
+{% for item in pillar.bin %}
+{% set install_file = bin_dir + '/' + item.name %}
+{{ item.name }}-file:
+  file.managed:
+    - name: {{ install_file }}
+    - user: {{ pillar.user }}
+    - mode: 755
     - source: {{ item.source }}
     - source_hash: {{ item.hash }}
     - require:
