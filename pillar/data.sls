@@ -8,6 +8,10 @@ bin:
   name: ack
   source: http://beyondgrep.com/ack-2.04-single-file
   hash: sha1=1c6f220595ad20f1c92bdf253054b0459ee222c3
+-
+  name: jq
+  source: http://stedolan.github.io/jq/download/linux64/jq
+  hash: sha1=cb79e10d1a2898dca0c5741633e8a6f0f7f87312
 
 lib:
 -
