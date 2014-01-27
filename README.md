@@ -8,7 +8,7 @@ You will need [Virtualbox](https://www.virtualbox.org/) and [Vagrant](http://www
 
 ## Installation
 
-1. Install [Salty Vagrant](https://github.com/saltstack/salty-vagrant/tree/master) with `vagrant gem install vagrant-salt`
+1. Install [Salty Vagrant](https://github.com/saltstack/salty-vagrant/tree/master) with `vagrant plugin install vagrant-salt`
 2. Clone this repo and edit the `Vagrantfile` to customize your VM to taste.
 3. Edit  `pillar/data.sls` and change `accept_oracle_download_terms` to `true`.
 4. Run `vagrant up`
