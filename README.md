@@ -87,9 +87,12 @@ True errors in building the agiledata environment are much uglier than this. How
 
 ### Supported operating systems
 
-This environment should work on any system that can run Virtualbox and Vagrant. If you experience problems installing on Windows related to changing file permissions (look for `Failed to change mode to 755`) in the output from the installation process you could try to delete line 13 in [oracle_java.sls](https://github.com/charlesflynn/agiledata/blob/master/salt/agiledata/oracle_java.sls) related to 
-        - mode: 755
+This environment should work on any system that can run Virtualbox and Vagrant. If you experience problems installing on Windows related to changing file permissions (look for `Failed to change mode to 755`) in the output from the installation process you could try to delete line 13 in [oracle_java.sls](https://github.com/charlesflynn/agiledata/blob/master/salt/agiledata/oracle_java.sls#L13) related to
 
-Windows does not have the same concept of file permissions as Unix based operative systems.
+```
+        - mode: 755
+```
+
+Windows does not have the same concept of file permissions as Unix-like and POSIX-compliant operating systems.
 
 The default VM (configured in the `Vagrantfile`) is Ubuntu Precise x64. I have also tested with Fedora 18. The environment may work using other Redhat- or Debian-based distros as well.
