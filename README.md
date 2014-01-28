@@ -34,6 +34,8 @@ The VM environment includes the following major components:
 - [Flask](http://flask.pocoo.org/)
 - [Oracle JDK 6u45](http://www.oracle.com/technetwork/java/javase/downloads/jdk6downloads-1902814.html)
 
+Please be aware that Oracle JDK 6u45 is known to contain several security vulnerabilities so be careful if you access the internet from the virtual machine.
+
 Also included are many libraries, dependencies, and build tools. For a more complete list see [data.sls](https://github.com/charlesflynn/agiledata/blob/master/pillar/data.sls) in this repo, and Russell Jurney's [requirements.txt](https://github.com/rjurney/Agile_Data_Code/blob/master/requirements.txt).
 
 ## Usage
@@ -85,6 +87,9 @@ True errors in building the agiledata environment are much uglier than this. How
 
 ### Supported operating systems
 
-This environment should work on any system that can run Virtualbox and Vagrant.
+This environment should work on any system that can run Virtualbox and Vagrant. If you experience problems installing on Windows related to changing file permissions (look for `Failed to change mode to 755`) in the output from the installation process you could try to delete line 13 in [oracle_java.sls](https://github.com/charlesflynn/agiledata/blob/master/salt/agiledata/oracle_java.sls) related to 
+        - mode: 755
+
+Windows does not have the same concept of file permissions as Unix based operative systems.
 
 The default VM (configured in the `Vagrantfile`) is Ubuntu Precise x64. I have also tested with Fedora 18. The environment may work using other Redhat- or Debian-based distros as well.
