@@ -16,8 +16,8 @@ bin:
 lib:
 -
   name: avro
-  source: http://apache.mirrors.pair.com/avro/avro-1.7.5/java/avro-1.7.5.jar
-  hash: sha1=171b69ba944a2dc197a3b0142e6514d3ff78a4a6
+  source: http://apache.mirrors.pair.com/avro/avro-1.7.6/java/avro-1.7.6.jar
+  hash: sha1=fb6a4e3fba12aeba677b7e92be1b920bf078f5e3
 -
   name: json-simple
   source: https://json-simple.googlecode.com/files/json-simple-1.1.1.jar
