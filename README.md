@@ -4,7 +4,7 @@ Builds a data science work environment for Russell Jurney's book [Agile Data Sci
 
 ## Prerequisites
 
-You will need [Virtualbox](https://www.virtualbox.org/) and [Vagrant](http://www.vagrantup.com/) installed and working. If you are using a version of Vagrant older than 1.3.0, you will also need [Salty Vagrant](https://github.com/saltstack/salty-vagrant).
+You will need [Virtualbox](https://www.virtualbox.org/) and [Vagrant](http://www.vagrantup.com/) installed and working. If you are using a version of Vagrant older than 1.3.0, you will also need [Salty Vagrant](https://github.com/saltstack/salty-vagrant). Salty Vagrant requires Ruby development libraries (ruby-dev on Ubuntu/Debian or ruby-devel on RHEL/Fedora/Centos).
 
 ## Installation
 
