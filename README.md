@@ -4,14 +4,13 @@ Builds a data science work environment for Russell Jurney's book [Agile Data Sci
 
 ## Prerequisites
 
-You will need [Virtualbox](https://www.virtualbox.org/) and [Vagrant](http://www.vagrantup.com/) installed and working.
+You will need [Virtualbox](https://www.virtualbox.org/) and [Vagrant](http://www.vagrantup.com/) installed and working. If you are using a version of Vagrant older than 1.3.0, you will also need [Salty Vagrant](https://github.com/saltstack/salty-vagrant).
 
 ## Installation
 
-1. Install [Salty Vagrant](https://github.com/saltstack/salty-vagrant/tree/master) with `vagrant plugin install vagrant-salt`
-2. Clone this repo and edit the `Vagrantfile` to customize your VM to taste.
-3. Edit  `pillar/data.sls` and change `accept_oracle_download_terms` to `true`.
-4. Run `vagrant up`
+1. Clone this repo and edit the `Vagrantfile` to customize your VM to taste.
+2. Edit  `pillar/data.sls` and change `accept_oracle_download_terms` to `true`.
+3. Run `vagrant up`
 
 See the [Installation notes](#installation-notes) section below for comments on Java versions, operating systems, and details on a misleading error message you may receive.
 
