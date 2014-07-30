@@ -2,7 +2,7 @@
 {% set install_file = '/srv/salt/agiledata/jdk-6u45-linux-x64.bin' %}
 java-download:
   cmd.run:
-    - name: curl -L --cookie "oraclelicensejdk-6u45-oth-JPR=accept-securebackup-cookie;gpw_e24=http://edelivery.oracle.com" http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-x64.bin -o {{ install_file }}
+    - name: curl -L --cookie "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-x64.bin -o {{ install_file }}
     - unless: file {{ install_file }}
     - require:
       - file: directories

@@ -31,7 +31,7 @@ The VM environment includes the following major components:
 - [NumPy](http://www.numpy.org/)
 - [SciPy](http://www.scipy.org/)
 - [Flask](http://flask.pocoo.org/)
-- [Oracle JDK 6u45](http://www.oracle.com/technetwork/java/javase/downloads/jdk6downloads-1902814.html)
+- [Oracle JDK 6u45](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase6-419409.html#jdk-6u45-oth-JPR)
 
 Please be aware that Oracle JDK 6u45 is known to contain several security vulnerabilities so be careful if you access the internet from the virtual machine. See the [Java versions](#java-versions) section below for further comments on choosing a different version.
 
