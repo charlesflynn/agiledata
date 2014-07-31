@@ -54,9 +54,6 @@ venv:
   virtualenv.manage:
     - name: {{ venv_dir }}
     - runas: {{ pillar.user }}
-    - no_site_packages: True
-    - distribute: True
-    - python: python2.7
     - require:
       - file: directories
 
